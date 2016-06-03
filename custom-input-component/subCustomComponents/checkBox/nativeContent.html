@@ -1,0 +1,13 @@
+
+
+<label>{{CheckBoxBoxCtrl.label}}</label>
+  <div ng-if="CheckBoxBoxCtrl.listType=='array'">
+    <div  ng-repeat="item in CheckBoxBoxCtrl.domainList">
+      <md-checkbox  ng-required="{{CheckBoxBoxCtrl.required && !(CheckBoxBoxCtrl.selectedData.length)}}" ng-click="CheckBoxBoxCtrl.reflectValue(item)" >{{item}}</md-checkbox>
+    </div>
+  </div>
+  <div ng-if="CheckBoxBoxCtrl.listType=='object'">
+    <div ng-repeat="(listKey, listValue) in CheckBoxBoxCtrl.domainList">
+      <md-checkbox ng-click="CheckBoxBoxCtrl.reflectValue(listKey)">{{listValue}}</md-checkbox>
+    </div>
+  </div>

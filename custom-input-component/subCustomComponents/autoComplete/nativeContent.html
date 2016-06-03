@@ -1,0 +1,26 @@
+
+
+
+
+<md-autocomplete
+	    md-input-name="autocompleteField"
+			required="autocompleteBoxCtrl.required"
+	    md-input-minlength="{{autocompleteBoxCtrl.specificAttr.minLength}}"
+	    md-input-maxlength="{{autocompleteBoxCtrl.specificAttr.maxLength}}"
+	    md-no-cache="noCache"
+	    md-selected-item="autocompleteBoxCtrl.bindData"
+	    md-search-text="autocompleteBoxCtrl.searchText"
+			md-items="item in autocompleteBoxCtrl.specificAttr.querySearch(autocompleteBoxCtrl.searchText)"
+	    md-item-text="item.display"
+	    md-floating-label="{{autocompleteBoxCtrl.label}}"
+	    md-selected-item-change ="autocompleteBoxCtrl.reflectValue(autocompleteBoxCtrl.bindData)">
+	  <md-item-template>
+	    <span md-highlight-text="autocompleteBoxCtrl.searchText">{{item.display}}</span>
+	  </md-item-template>
+	<!--   <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+	  <div ng-message="required">You <b>must</b> have a favorite state.</div>
+	  -->
+
+		      <div ng-messages="{'required': !(autocompleteBoxCtrl.bindData)}">
+		            <div ng-message="required">Please enter the {{autocompleteBoxCtrl.label}}</div>
+	</md-autocomplete>

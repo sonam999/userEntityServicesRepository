@@ -1,0 +1,33 @@
+<md-input-container>
+      <label>{{singleSelectBoxCtrl.label}}</label>
+
+
+      <md-select ng-model="singleSelectBoxCtrl.bindData" ng-change="singleSelectBoxCtrl.reflectValue(singleSelectBoxCtrl.bindData)" ng-required="singleSelectBoxCtrl.required">
+        <div ng-if="singleSelectBoxCtrl.listType=='array'">
+          <div ng-if="singleSelectBoxCtrl.listDataType =='object' ">
+            <md-option  ng-repeat="item in singleSelectBoxCtrl.specificAttr.domainList" value="{{item[singleSelectBoxCtrl.specificAttr.listValueKey]}}">
+                  {{item[singleSelectBoxCtrl.specificAttr.listLabelKey]}}
+            </md-option>
+          </div>
+          <div ng-if="singleSelectBoxCtrl.listDataType =='element' ">
+
+            <md-option  ng-repeat="item in singleSelectBoxCtrl.specificAttr.domainList" value="{{item}}">
+                  {{item}}
+            </md-option>
+          </div>
+
+        </div>
+        <div ng-if="singleSelectBoxCtrl.listType=='object'">
+          <md-option ng-repeat="(listKey, listValue) in singleSelectBoxCtrl.specificAttr.domainList" value="{{listKey}}">
+            {{listValue}}
+          </md-option>
+
+        </div>
+      </md-select>
+
+      <div ng-messages="{'required': !(singleSelectBoxCtrl.bindData)}">
+            <div ng-message="required">Please enter the {{singleSelectBoxCtrl.label}}</div>
+      </div>
+
+
+  </md-input-container>

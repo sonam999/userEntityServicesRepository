@@ -1,0 +1,11 @@
+<div>
+  <md-card>
+    <md-card-content>
+      {{selecledValue}}
+        <div ng-repeat="(key,value) in userEntityCustomObject">
+          {{key}}{{value}}
+          <custom-input-box reflect-custom-input="reflectValue(keyString,value)" bind-data="selecledValue" bind-data-key="value.id" type="value.type" label="value.label" specific-attr="value.specificAttr" required="true"></custom-input-box>
+         </div>
+    </md-card-content>
+  <md-card>
+</div>

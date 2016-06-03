@@ -1,0 +1,29 @@
+<md-input-container>
+    <label>{{TextBoxCtrl.label}}</label>
+
+    <!-- <div ng-if="TextBoxCtrl.required"> -->
+
+      <input ng-model="TextBoxCtrl.bindData" ng-change="TextBoxCtrl.reflectValue(TextBoxCtrl.bindData)" ng-required="{{TextBoxCtrl.required}}" ng-pattern="{{TextBoxCtrl.ngpattern}}">
+    <!-- </div> -->
+
+    <!-- <div ng-if="!TextBoxCtrl.required">
+
+      <input ng-model="TextBoxCtrl.bindData" ng-change="TextBoxCtrl.reflectValue(TextBoxCtrl.bindData)"  ng-pattern="{{TextBoxCtrl.ngpattern}}">
+    </div> -->
+
+    <div class="hint">{{TextBoxCtrl.ngHint}}</div>
+    <div ng-messages="{'required': (!(TextBoxCtrl.bindData) && TextBoxCtrl.required)}">
+          <div ng-message="required">Please enter the {{TextBoxCtrl.label}}</div>
+    </div>
+
+</md-input-container>
+
+
+
+
+
+<!--
+<br>
+<label for="">{{TextBoxCtrl.label}}</label>
+<br>
+<input type="text" ng-model="TextBoxCtrl.bindData" ng-change="TextBoxCtrl.reflectValue(TextBoxCtrl.bindData)"></input> -->
