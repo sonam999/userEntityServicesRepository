@@ -12,7 +12,7 @@ var setObj = function(obj, keyString,value) {
     keyString = keyString.replace(/^\./, '');           // strip a leading dot
     console.log("After second replace", keyString);
     var hierarchyWiseKeysArray = keyString.split('.');
-
+    console.log(hierarchyWiseKeysArray);
     while (hierarchyWiseKeysArray.length > 1)
         obj = obj[hierarchyWiseKeysArray.shift()];
     return obj[hierarchyWiseKeysArray.shift()] = value;

@@ -1,11 +1,29 @@
 <div>
   <md-card>
     <md-card-content>
-      {{selecledValue}}
+      {{entityData}}
+
+        <div>
+          <img ng-src="{{entityData.picture}}">
+        </div>
         <div ng-repeat="(key,value) in userEntityCustomObject">
-          {{key}}{{value}}
-          <custom-input-box reflect-custom-input="reflectValue(keyString,value)" bind-data="selecledValue" bind-data-key="value.id" type="value.type" label="value.label" specific-attr="value.specificAttr" required="true"></custom-input-box>
-         </div>
+            <div ng-if="key=='first_name'||key=='last_name'||key=='role'||key=='mobile'||key=='work_location'">
+              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[key]" bind-data-key="entityData" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+            </div>
+
+            <div ng-if="key=='project_name'||key=='team_name'||key=='project_role'||key=='manager'">
+              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.projects[key]" bind-data-key="entityData.projects" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+            </div>
+
+            <div ng-if="key=='passport_number'||key=='date_of_expiry'||key=='date_of_issue'||key=='issuing_authority'">
+              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[key]" bind-data-key="entityData.passport_details" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+            </div>
+
+            <div ng-if="">
+
+            </div>
+        </div>
+
     </md-card-content>
   <md-card>
 </div>
