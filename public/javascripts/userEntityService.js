@@ -7,5 +7,9 @@ angular.module("app").factory("userEntityService",function($http){
       console.log("hey");
       return $http.get("data/userEntityCustomJson.json");
     }
+    // updateUserEntityData:function(id,userEntityObject){
+    //   console.log("update method called");
+    //  return $http.put("http://localhost:3040/api/userEntity/"+id+"/"+userEntityObject);
+    // }
   }
 });

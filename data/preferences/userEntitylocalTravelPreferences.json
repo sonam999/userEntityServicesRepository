@@ -1,0 +1,18 @@
+{
+  "local_type":{
+    "id":"local_type",
+    "type":"singleSelect",
+    "label":"Local type",
+    "specificAttr":{
+        "domainList":[]
+      }
+    },
+    "price":{
+      "id":"price",
+      "type":"multiSelect",
+      "label":"Price",
+      "specificAttr":{
+          "domainList":[]
+      }
+    }
+}

@@ -1,0 +1,42 @@
+{
+  "airlines":{
+    "id":"airlines",
+    "type":"multiSelect",
+    "label":"Airlines",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "fare_type":{
+    "id":"fare_type",
+    "type":"multiSelect",
+    "label":"Fare type",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "departure_time":{
+    "id":"departure_time",
+    "type":"multiSelect",
+    "label":"Departure time",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "arrival_time":{
+    "id":"arrival_time",
+    "type":"multiSelect",
+    "label":"Arrival time",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "no_of_stop":{
+    "id":"no_of_stop",
+    "type":"multiSelect",
+    "label":"No of stop",
+    "specificAttr":{
+        "domainList":[]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "rating":{
+    "id":"rating",
+    "type":"autoComplete",
+    "label":"Rating",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "location":{
+    "id":"location",
+    "type":"multiSelect",
+    "label":"Location",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "amenities":{
+    "id":"amenities",
+    "type":"multiSelect",
+    "label":"Amenities",
+    "specificAttr":{
+        "domainList":[]
+    }
+  },
+  "price":{
+    "id":"price",
+    "type":"multiSelect",
+    "label":"Price",
+    "specificAttr":{
+        "domainList":[]
+    }
+  }
+}

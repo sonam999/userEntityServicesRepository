@@ -1,29 +1,65 @@
-<div>
-  <md-card>
-    <md-card-content>
-      {{entityData}}
+<div layout-align="center center">
+  {{userEntityCustomObject}}
+  <div ng-repeat="(key,value) in userEntityCustomObject">
+    {{key}}
+    <br>
+    {{value}}
 
-        <div>
-          <img ng-src="{{entityData.picture}}">
+    <br>Before CIB<br>
+    INDEX IS {{$index}} 
+    <br>
+      <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[key]" bind-data-key="entityData" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+  <br>After CIB<br>
+
+
+    <!-- <div ng-if="key=='profile'">
+      <div ><img ng-src="{{entityData.picture}}"></div>
+      <md-card layout="row">
+          <div ng-repeat="(key,value) in value">
+             <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[key]" bind-data-key="entityData" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+          </div>
+          <button ng-click="update()">Save</button>
+      </md-card>
+    </div>
+
+    <div ng-if="key=='passportDetails'">
+      <md-card>
+        <div ng-repeat="(key,value) in value">
+          <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[key]" bind-data-key="entityData.passport_details" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
         </div>
-        <div ng-repeat="(key,value) in userEntityCustomObject">
-            <div ng-if="key=='first_name'||key=='last_name'||key=='role'||key=='mobile'||key=='work_location'">
-              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[key]" bind-data-key="entityData" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
-            </div>
+        <button ng-click="update()">Save</button>
+      </md-card>
+    </div>
 
-            <div ng-if="key=='project_name'||key=='team_name'||key=='project_role'||key=='manager'">
-              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.projects[key]" bind-data-key="entityData.projects" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
-            </div>
-
-            <div ng-if="key=='passport_number'||key=='date_of_expiry'||key=='date_of_issue'||key=='issuing_authority'">
-              <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[key]" bind-data-key="entityData.passport_details" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
-            </div>
-
-            <div ng-if="">
-
-            </div>
+    <div ng-if="key=='stay'">
+      <md-card>
+        <div ng-repeat="(key,value) in value">
+          {{key}}
+          {{value}}
+           <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.preferences.stay[key]" bind-data-key="entityData.preferences.stay" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
         </div>
+        <button ng-click="update()">Save</button>
+      </md-card>
+    </div>
 
-    </md-card-content>
-  <md-card>
+    <div ng-if="key=='booking'">
+      <md-card>
+        <div ng-repeat="(key,value) in value">
+          {{key}}{{value}}
+           <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.preferences.booking[key]" bind-data-key="entityData.preferences.booking" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+        </div>
+        <button ng-click="update()">Save</button>
+      </md-card>
+    </div>
+
+    <div ng-if="key=='local_travel'">
+      <md-card>
+        <div ng-repeat="(key,value) in value">
+          {{key}}{{value}}
+           <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.preferences.booking[key]" bind-data-key="entityData.preferences.booking" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+        </div>
+        <button ng-click="update()">Save</button>
+      </md-card>
+    </div> -->
+  </div>
 </div>
