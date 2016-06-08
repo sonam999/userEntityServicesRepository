@@ -33,36 +33,47 @@ var userEntitySchema= new schema({
                issuing_authority :   String
             },
              preferences : {
-               stay : [{
-                 rating : [Number],
-                 location : [String],
-                 amenities : [String],
-                 price : [String]
-              }],
-               booking : [{
-                 airlines : [String],
-                 fare_type : Boolean,
-                 departure_time : [String],
-                 arrival_time : [String],
-                 no_of_stop : Number,
-                 price : [String]
-              }],
-               local_travel : [{
-                 price : [String],
-                 local_type : [String]
-              }]
-            },
-             favorite_travel : {
-               travel_plan_id :   String,
-               comment :   String
+                   stay : {
+                     rating : [Number],
+                     location : [String],
+                     amenities : [String],
+                     price : [String]
+                  },
+                   flight : {
+                     airlines : [String],
+                     depature_time : [String],
+                     stops : [Number],
+                     fare_type : [String],
+                     price : [String]
+                  },
+                  train :{
+                      price:[String],
+                      departure_time:[String],
+                      arrival_time:[String]
+                  },
+                  bus: {
+                    price:[String],
+                    bus_type:[String]
+                  },
+                  local_travel : {
+                     price : [String],
+                     local_type : [String]
+                  }
             },
              visa_availability : [{
                from :   String ,
                to :   String ,
                visa_category :  Boolean
             }],
+            favorite_travel : {
+              travel_plan_id :   String,
+              comments :   String
+           },
              cost_code : String,
-             country : String
+             country_code: String,
+             country : String,
+             organisation_name: String,
+             prefered_language: String
      });
 
 var userEntityModel=mongoose.model('userEntityModel',userEntitySchema,'userEntityCollection');
@@ -81,30 +92,38 @@ userEntityService.getUserEntity=function(userId){
    var deferred=Q.defer();
    console.log('inside get model');
    console.log(userId);
-   userEntityModel.find({id:userId})
+   userEntityModel.findOne({id:userId})
                   .exec(function(err,data){
-                    console.log(err);
-                    userEntityObject=data;
-                    console.log(userEntityObject);
-                    deferred.resolve(userEntityObject);
+                      if(err){
+                        console.log(err);
+                        deferred.reject();
+                      }
+                      else{
+                        userEntityObject=data;
+                        if(userEntityObject==null){
+                          deferred.reject();
+                        }
+                        else{
+                          console.log(userEntityObject);
+                          deferred.resolve(userEntityObject);
+                      }
+                     }
                   });
           return deferred.promise;
 };
 
 userEntityService.putUserEntity=function(userId,newUserEntityObject){
    var deferred=Q.defer();
-   userEntityModel.find({id:userId})
-                  .exec(function(err,data){
-                    console.log(err);
-                    console.log(data);
-                    userEntityObject=data;
-                    newModel=new userEntityModel(newUserEntityObject);
-                    userEntityObject=newModel;
-                    userEntityObject.save();
-                    message="updated successfully";
-                    deferred.resolve(message);
-      })
-      return deferred.promise;
+   userEntityModel.findOneAndUpdate({id:userId},newUserEntityObject,{new:true},function(err,data){
+     if(err){
+        deferred.reject(err);
+     }
+     else{
+         if(data==null){deferred.reject();}
+         else{deferred.resolve(data);}
+      }
+    });
+   return deferred.promise;
 };
 
 userEntityService.deleteUserEntity=function(userId){

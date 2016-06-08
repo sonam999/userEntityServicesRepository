@@ -5,7 +5,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
        controller:"userEntityServiceController",
        resolve:{
             userEntityData: function(userEntityService){
-              return userEntityService.getUserEntityData('b4bc5412e7640090f4946b1417b3fc8792b4ec5d31e0810b9a8cab751e542975');
+              return userEntityService.getUserEntityData('tydalogger');
             },
             userEntityCustomData: function(userEntityService){
               return userEntityService.getUserEntityCustomData();
@@ -16,11 +16,14 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
          }
      });
   })
-  .controller("userEntityServiceController",function($scope,userEntityData,userEntityCustomData){
+
+  .controller("userEntityServiceController",function($scope,userEntityService,userEntityData,userEntityCustomData){
+
     console.log(userEntityCustomData);
     userEntityCustomObject=userEntityCustomData.data;
     console.log(userEntityCustomObject);
     $scope.userEntityCustomObject=userEntityCustomObject;
+    console.log(userEntityData);
 
        setObj = function(obj, keyString,value) {
       		console.log("Before Replace ", keyString)
@@ -31,7 +34,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
           var hierarchyWiseKeysArray = keyString.split('.');
 
           while (hierarchyWiseKeysArray.length > 1)
-              obj = obj[hierarchyWiseKeysArray.shift()];
+          obj = obj[hierarchyWiseKeysArray.shift()];
           return obj[hierarchyWiseKeysArray.shift()] = value;
    };
 
@@ -43,107 +46,338 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
           setObj($scope, keyString+"."+id, value);
    };
 
+   console.log(userEntityData);
+   var entityData=userEntityData.data;
+   console.log(entityData);
+   entityData.picture="public/images/avatar-female.png"
+   $scope.entityData=entityData;
 
-  $scope.entityData={
-    "picture": "http://dummyimage.com/176x127.bmp/cc0000/ffffff",
-    "id": "d8b2c57d203581d75fbdbb0786803ccbea3cb0328ae7014e5fe64f6cd1de9032",
-    "role": "Administrative Officer",
-    "band": "Spinach",
-    "gender": "M",
-    "first_name": "Arthur",
-    "last_name": "Henry",
-    "date_of_birth": "11/25/2015",
-    "residential_address": "771 Dennis Way",
-    "mobile": "466-45-5501",
-    "other_contacts": "637-31-6140",
-    "date_of_joining": "12/5/2015",
-    "work_experience_in_year": 1,
-    "language": ["Khmer", "Persian", "Kannada", "Arabic", "Khmer", "Aymara", "Indonesian", "Icelandic", "Icelandic", "Tetum"],
-    "work_location": "2454 Muir Avenue",
-    "projects": [{
-      "project_id": "com.pinterest.Subin",
-      "project_name": "NYLOXIN",
-      "team_name": "Acnotex acne Treatment",
-      "project_role": "Actuary",
-      "manager": "Frances Bell"
-    }],
-    "passport_details": {
-      "passport_number": 1,
-      "date_of_expiry": "3/6/2016",
-      "date_of_issue": "3/19/2016",
-      "issuing_authority": "France"
-    },
-    "preferences": {
-      "stay": {
-        "rating": [26, 89, 98, 69, 2, 28, 26, 38, 25, 12],
-        "location": ["Радовиш", "Baiyang", "Yazykovo", "Santa Catalina", "Bayshint", "Dingzhai", "El Obeid", "Komatsu", "Lagoa", "Mazra‘at Bayt Jinn"],
-        "amenities": ["gov", "com", "net", "name", "info", "org", "name", "gov", "info", "info"],
-        "price": ["$2.31", "$1.65", "$8.65", "$2.93", "$1.56", "$2.93", "$6.03", "$0.92", "$5.87", "$1.36"]
-      },
-      "booking": {
-        "airlines": ["Dayu", "Radenković", "Fukura", "Zhabagly", "Ramon Magsaysay", "Hele", "Madīnat Lab‘ūs", "Lutomiersk", "Konispol", "Biris Daja"],
-        "fare_type": true,
-        "departure_time": ["3:20 AM", "10:43 PM", "3:45 PM"],
-        "arrival_time": ["2:46 AM", "2:43 AM", "6:38 PM"],
-        "no_of_stop": 1,
-        "price": ["$2.52", "$9.48", "$4.07", "$0.50", "$0.26"]
-      },
-      "local_travel": {
-        "price": ["$0.88", "$1.15", "$1.89"],
-        "local_type": ["DOCUSATE SODIUM", "hydrochlorothiazide", "Trifluoperazine Hydrochloride"]
-      }
-    },
-    "favorite_travel": {
-      "travel_plan_id": "com.linkedin.Regrant",
-      "comment": "Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum."
-    },
-    "visa_availability": [{
-      "from": "Mošorin",
-      "to": "Pamoyanan",
-      "visa_category": true
-    }, {
-      "from": "Lapa",
-      "to": "Jiyukou",
-      "visa_category": false
-    }],
-    "cost_code": "$74.06",
-    "country": "FR"
-   }
+   $scope.save=function(){
+      console.log("inside save function");
+      userEntityService.updateUserEntityData('tydalogger',entityData).then(function(err,data){
+        if(err) console.log(err);
+        console.log(data);
+      });
+   };
 
-  //  $scope.update=function(){
-  //     var response = userEntityService.updateUserEntityData();
-  //  }
+   var stayCustomData={
+        "serviceDisplayName": "Stay",
+        "serviceObject": {
+          "location": {
+            "specificAttr": {
+              "url": "autoComplete.json"
+            },
+            "inputType": "autoComplete",
+            "id": "location",
+            "displayName": "City",
+            "mandatory": true
+          },
+          "area": {
+            "specificAttr": {
+              "url": "autoComplete.json"
+            },
+            "inputType": "autoComplete",
+            "id": "area",
+            "displayName": "Area",
+            "mandatory": true
+          },
+          "checkinDate": {
+            "inputType": "date",
+            "id": "checkoutDate",
+            "displayName": "Check-out Date",
+            "mandatory": true
+          },
+          "checkinTime": {
+            "inputType": "time",
+            "id": "checkinTime",
+            "displayName": "Check-in Time",
+            "mandatory": true
+          },
+          "checkoutTime": {
+            "inputType": "time",
+            "id": "checkoutTime",
+            "displayName": "Check-out Time",
+            "mandatory": true
+          },
+          "preferences": {
+            "specificAttr": {
+              "domainList": {
+                "nonAc": "Non-Ac",
+                "ac": "AC"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "preferences",
+            "displayName": "Preferences",
+            "mandatory": false
+          },
+          "rating": {
+            "specificAttr": {
+              "domainList": {
+                "fourStar": "4-star",
+                "threeStar":"3-star",
+                "twoStar": "2-star",
+                "oneStar": "1-star"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "rating",
+            "displayName": "Rating",
+            "mandatory": false
+          },
+          "typeOfProperty": {
+            "specificAttr": {
+              "domainList": {
+                "hotels": "Hotels",
+                "guestHouse": "Guest House"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "typeOfProperty",
+            "displayName": "Type Of Property",
+            "mandatory": true
+          },
+          "nearBy": {
+            "specificAttr": {
+              "endPointsTranslate": {
+                "postfix": "miles",
+                "prefix": ""
+              },
+              "sliderHandleTranslate": {
+                "postfix": "mi",
+                "prefix": ""
+              },
+              "noSwitching": true,
+              "step": 1,
+              "ceil": 100,
+              "floor": 0
+            },
+            "inputType": "singleSlider",
+            "id": "nearBy",
+            "displayName": "Near By",
+            "mandatory": false
+          },
+          "stars": {
+            "specificAttr": {
+              "domainList": {
+                "fourStar": "4-star",
+                "threeStar": "3-star",
+                "twoStar": "2-star",
+                "oneStar": "1-star"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "stars",
+            "displayName": "Stars",
+            "mandatory": false
+          },
+          "amenities": {
+            "specificAttr": {
+              "domainList": {
+                "restaurants": "Restraunts",
+                "fitness": "Fitness",
+                "swimmingPools": "Swimming Pool",
+                "meetingRooms": "Meeting Rooms"
+              }
+            },
+            "inputType": "multiSelect",
+            "id": "amenities",
+            "displayName": "Amenities",
+            "mandatory": false
+          },
+          "proximity": {
+            "specificAttr": {
+              "domainList": {
+                "railwayStations": "Railway Stations",
+                "airports": "Airports",
+                "taxiStands": "Taxi Stands",
+                "metroStation": "Metro Station"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "proximity",
+            "displayName": "Proximity",
+            "mandatory": false
+          }
+        }
+};
 
-    // console.log(userEntityData);
-    // var entityData=userEntityData.data[0];
-    // console.log(entityData);
-    // $scope.entityData=entityData;
+var flightCustomData={
+        "serviceDisplayName": "Flight",
+        "serviceObject": {
+          "travelStartDate": {
+            "dataReference": "essential.travelStartDate",
+            "inputType": "date",
+            "id": "travelStartDate",
+            "displayName": "Travel Start Date",
+            "mandatory": true
+          },
+          "class": {
+            "specificAttr": {
+              "domainList": {
+                "economy": "Economy",
+                "bussiness": "Bussiness"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "class",
+            "displayName": "Class",
+            "mandatory": true
+          },
+          "numberOfHops": {
+            "specificAttr": {
+              "endPointsTranslate": {
+                "postfix": "miles",
+                "prefix": ""
+              },
+              "sliderHandleTranslate": {
+                "prefix": "mi"
+              },
+              "noSwitching": true,
+              "step": 1,
+              "ceil": 100,
+              "floor": 0
+            },
+            "inputType": "singleSlider",
+            "id": "numberOfHops",
+            "displayName": "Number of Hops",
+            "mandatory": true
+          },
+          "departureTime": {
+            "inputType": "time",
+            "id": "departureTime",
+            "displayName": "Departure Time",
+            "mandatory": false
+          },
+          "airlines": {
+            "specificAttr": {
+              "domainList": {
+                "jet": "Jet",
+                "airCosta": "Air Costa",
+                "airAisa": "Air Asia"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "airlines",
+            "displayName": "Airlines",
+            "mandatory": false
+          }
+        }
+   };
+   var trainCustomData={
+        "serviceDisplayName": "Train",
+        "serviceObject": {
+          "travelStartDate": {
+            "dataReference": "essential.travelStartDate",
+            "inputType": "date",
+            "id": "travelStartDate",
+            "displayName": "Travel Start Date",
+            "mandatory": true
+          },
+          "class": {
+            "specificAttr": {
+              "domainList": {
+                "3AC": "third Ac",
+                "sleeper": "Sleeper"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "class",
+            "displayName": "Class",
+            "mandatory": true
+          },
+          "departureTime": {
+            "inputType": "time",
+            "id": "departureTime",
+            "displayName": "Departure Time",
+            "mandatory": false
+          }
+        }
+      };
+      var busCustomData={
+        "serviceDisplayName": "Bus",
+        "serviceObject": {
+          "travelStartDate": {
+            "dataReference": "essential.travelStartDate",
+            "inputType": "date",
+            "id": "travelStartDate",
+            "displayName": "Travel Start Date",
+            "mandatory": true
+          },
+          "class": {
+            "specificAttr": {
+              "domainList": {
+                "SemiSleeper": "Semi-Sleeper",
+                "sleeper": "Sleeper"
+              }
+            },
+            "inputType": "singleSelect",
+            "id": "class",
+            "displayName": "Class",
+            "mandatory": true
+          },
+          "departureTime": {
+            "inputType": "time",
+            "id": "departureTime",
+            "displayName": "Departure Time",
+            "mandatory": false
+          }
+        }
+      };
 
-    // var personalInfo={};
-    // personalInfo.picture=entityData.picture;
-    // personalInfo.first_name=entityData.first_name;
-    // personalInfo.last_name=entityData.last_name;
-    // personalInfo.role=entityData.role;
-    // personalInfo.mobile=entityData.mobile;
-    // personalInfo.work_location=entityData.work_location;
-    //
-    // projects=entityData.projects[0];
-    // console.log(projects);
-    //
-    // passport_details=entityData.passport_details;
-    // console.log(passport_details);
-    //
-    // visa_availability=entityData.visa_availability;
-    // console.log(visa_availability);
-    //
-    // preferences=entityData.preferences;
-    // console.log(preferences);
-    //
-    // var profileObject={};
-    // profileObject.personalInfo=personalInfo;
-    // profileObject.projects=projects;
-    // profileObject.passport_details=passport_details;
-    // profileObject.visa_availability=visa_availability;
-    // profileObject.preferences=preferences;
-    // $scope.profileObject=profileObject;
+  var localTravelCustomData={
+          "serviceDisplayName": "Local Travel",
+          "serviceObject": {
+            "pickupPoint": {
+              "specificAttr": {
+                "url": "autoComplete.json"
+              },
+              "inputType": "autoComplete",
+              "id": "pickupPoint",
+              "displayName": "Pick-up Point",
+              "mandatory": true
+            },
+            "dropPoint": {
+              "specificAttr": {
+                "url": "autoComplete.json"
+              },
+              "inputType": "autoComplete",
+              "id": "dropPoint",
+              "displayName": "Drop Point",
+              "mandatory": true
+            },
+            "typeOfLocalTransport": {
+              "specificAttr": {
+                "domainList": {
+                  "bus": "Bus",
+                  "cab": "Cab"
+                }
+              },
+              "inputType": "singleSelect",
+              "displayName": "Type",
+              "id": "typeOfLocalTransport",
+              "mandatory": true
+            },
+            "pickupDate": {
+              "inputType": "date",
+              "id": "pickupDate",
+              "displayName": "Pick up Date",
+              "mandatory": true
+            },
+            "pickupTime": {
+              "inputType": "time",
+              "id": "pickupTime",
+              "displayName": "Pick up Time",
+              "mandatory": true
+            }
+          }
+        };
+
+    var preferencesArray=[];
+    preferencesArray.push(stayCustomData);
+    preferencesArray.push(flightCustomData);
+    preferencesArray.push(trainCustomData);
+    preferencesArray.push(busCustomData);
+    preferencesArray.push(localTravelCustomData);
+    $scope.preferencesArray=preferencesArray;
  });

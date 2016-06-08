@@ -2,11 +2,6 @@ var express=require('express');
 var router=express.Router();
 var userEntityService=require('../models/userEntityModel');
 
-// router.route('/')
-//    .get(function(req,res,next){
-//     res.sendfile("userProfile.html");
-// });
-
 router.route('/userEntity')
 
   .get(function(req,res,next){
@@ -19,7 +14,9 @@ router.route('/userEntity')
    })
 
   .post(function(req,res,next){
+      console.log(req);
       var userEntityObject=req.body.userEntityObject;
+      console.log(userEntityObject);
       userEntityService.postUserEntity(userEntityObject)
                         .then(function(err,result){
                           if(err) res.send(err);
@@ -40,20 +37,23 @@ router.route('/userEntity/:Id')
                             console.log(result);
                             res.json(result);
        }).catch(function(err){
-          res.send(err);
+          console.log(err);
+          res.sendStatus(404);
        });
   })
 
   .put(function(req,res,next){
       var userId=req.params.Id;
-      var userEntityObject=req.params.userEntityObject;
+      var userEntityObject=req.body.userEntityObject;
+      console.log("in put method");
+      console.log(userEntityObject);
       userEntityService.putUserEntity(userId,userEntityObject)
                        .then(function(result){
                          console.log(result);
                          console.log('inside put method');
                          res.json({msg:result});
      }).catch(function(err){
-       res.send(err);
+       res.sendStatus(404);
      });
   })
 
