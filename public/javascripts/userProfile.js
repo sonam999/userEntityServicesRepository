@@ -41,7 +41,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
     $scope.userEntityCustomObject=userEntityCustomObject;
     console.log(userEntityData);
 
-       setObj = function(obj, keyString,value) {
+     setObj = function(obj, keyString,value) {
       		console.log("Before Replace ", keyString)
           keyString = keyString.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
           console.log("After first replace", keyString);
@@ -242,7 +242,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
           }
         }
 };
-var stayData=pickDeep(stayCustomData,['serviceDisplayName','preferences','rating','typeOfProperty','stars','amenities','proximity']);
+var stayData=pickDeep(stayCustomData,['serviceDisplayName','preferences','rating','typeOfProperty','stars','amenities']);
 console.log("pickDeep method result");
 console.log(stayData);
 var flightCustomData={

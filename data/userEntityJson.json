@@ -29,30 +29,24 @@
 	},
 	"preferences": {
 		"stay": {
-			"rating": [1,2,3,4],
-			"location": ["Minyue", "Mīr Bachah Kōṯ", "Kesugihan", "Kuala Lumpur", "Choma", "Buni Yadi", "Lawdar", "Hässleholm", "Vittel", "Potrero Grande"],
-			"amenities": ["Pink", "Mauv", "Purple", "Indigo", "Orange", "Khaki", "Blue", "Crimson"],
-			"price": ["$6.68", "$9.46", "$7.58", "$6.25", "$5.29"]
+      "preferences" :"AC",
+			"rating": "3-star",
+			"typeOfProperty":"Hotels",
+			"stars": "4-star",
+			"amenities": ["Restraunts","Fitness"]
 		},
 		"flight": {
-			"airlines": ["Air Asia","Air Costa"],
-			"depature_time": ["3:44 PM", "11:24 AM", "1:41 AM", "5:20 PM"],
-			"stops": [0,1],
-			"fare_type": ["REFUNDABLE"],
-			"price": ["6000","8000"]
+			"airlines": "Air Asia",
+			"class":"Economy"
 		},
 		"train": {
-			"price": ["4000","6000"],
-			"departure_time": ["8:31 AM", "4:39 PM", "5:14 AM", "7:00 AM"],
-			"arrival_time": ["5:48 PM", "4:28 PM", "9:15 AM", "11:36 PM"]
+		  "class":"Sleeper"
 		},
 		"bus": {
-			"price": ["3000","4000"],
-			"bus_type": ["AC"]
+			"class":"Sleeper"
 		},
 		"local_travel": {
-			"price": ["500","800"],
-			"local_type": ["cab"]
+		 "typeOfLocalTransport":"Cab"
 		}
 	},
 	"visa_availability": [{
@@ -103,32 +97,26 @@
 		"issuing_authority": "India"
 	},
 	"preferences": {
-		"stay": {
-			"rating": [4,5],
-			"location": ["Bích Động", "Mora", "Tugu", "Dadian", "Qiujia", "Tangtou", "Baytā al Fawqā", "Kalkal Barat", "Huakoulongtan", "Zhifang"],
-			"amenities": ["Pink", "Fuscia", "Maroon", "Green", "Maroon", "Violet", "Yellow", "Goldenrod"],
-			"price": ["5000","8000"]
-		},
-		"flight": {
-			"airlines": ["Air Asia","Air Costa","Jet"],
-			"depature_time": ["1:10 AM", "1:09 PM", "5:27 AM", "3:27 PM"],
-			"stops": [1, 0],
-			"fare_type": ["REFUNDABLE"],
-			"price": ["10000","12000"]
-		},
-		"train": {
-			"price": ["7000","9000"],
-			"departure_time": ["8:50 AM", "8:43 AM", "4:50 PM", "5:14 AM"],
-			"arrival_time": ["7:44 AM", "10:01 PM", "2:42 PM", "11:26 PM"]
-		},
-		"bus": {
-			"price": ["4000","5000"],
-			"bus_type": ["cab"]
-		},
-		"local_travel": {
-			"price": ["1000","1500"],
-			"local_type": ["cab"]
-		}
+    "stay": {
+      "preferences" :"AC",
+      "rating": "3-star",
+      "typeOfProperty":"Hotels",
+      "stars": "4-star",
+      "amenities": ["Restraunts","Fitness"]
+    },
+    "flight": {
+      "airlines": "Air Asia",
+      "class":"Economy"
+    },
+    "train": {
+      "class":"Sleeper"
+    },
+    "bus": {
+      "class":"Sleeper"
+    },
+    "local_travel": {
+     "typeOfLocalTransport":"Cab"
+    }
 	},
 	"visa_availability": [{
 		"from": "India",

@@ -34,30 +34,24 @@ var userEntitySchema= new schema({
             },
              preferences : {
                    stay : {
-                     rating : [Number],
-                     location : [String],
-                     amenities : [String],
-                     price : [String]
+                     preferences:String,
+                     rating : String,
+                     typeOfProperty : String ,
+                     stars : String,
+                     amenities : [String]
                   },
                    flight : {
-                     airlines : [String],
-                     depature_time : [String],
-                     stops : [Number],
-                     fare_type : [String],
-                     price : [String]
+                     airlines : String,
+                     class: String
                   },
                   train :{
-                      price:[String],
-                      departure_time:[String],
-                      arrival_time:[String]
+                    class: String
                   },
                   bus: {
-                    price:[String],
-                    bus_type:[String]
+                    class: String
                   },
                   local_travel : {
-                     price : [String],
-                     local_type : [String]
+                    typeOfLocalTransport: String
                   }
             },
              visa_availability : [{
@@ -99,14 +93,14 @@ userEntityService.getUserEntity=function(userId){
                         deferred.reject();
                       }
                       else{
-                        userEntityObject=data;
-                        if(userEntityObject==null){
-                          deferred.reject();
-                        }
-                        else{
-                          console.log(userEntityObject);
-                          deferred.resolve(userEntityObject);
-                      }
+                          userEntityObject=data;
+                          if(userEntityObject==null){
+                            deferred.reject();
+                          }
+                          else{
+                            console.log(userEntityObject);
+                            deferred.resolve(userEntityObject);
+                          }
                      }
                   });
           return deferred.promise;
