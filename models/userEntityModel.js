@@ -114,7 +114,11 @@ userEntityService.putUserEntity=function(userId,newUserEntityObject){
      }
      else{
          if(data==null){deferred.reject();}
-         else{deferred.resolve(data);}
+         else{
+           console.log("inside model..............");
+           console.log(newUserEntityObject);
+           deferred.resolve(data);
+         }
       }
     });
    return deferred.promise;

@@ -70,6 +70,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
 
    $scope.save=function(){
       console.log("inside save function");
+      console.log(entityData);
       userEntityService.updateUserEntityData('tydalogger',entityData).then(function(response){
         console.log(response.data);
       });

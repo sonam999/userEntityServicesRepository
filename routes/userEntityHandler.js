@@ -44,15 +44,14 @@ router.route('/userEntity/:Id')
 
   .put(function(req,res,next){
       var userId=req.params.Id;
-      var userEntityObject=req.body.userEntityObject;
+      var userEntityObject=req.body;
       console.log(userId);
-      console.log("in put method");
+      console.log("inside handler........");
       console.log(userEntityObject);
       userEntityService.putUserEntity(userId,userEntityObject)
                        .then(function(result){
                          console.log(result);
                          console.log('inside put method');
-                         var result="update successfully";
                          res.json({msg:result});
      }).catch(function(err){
        res.sendStatus(404);

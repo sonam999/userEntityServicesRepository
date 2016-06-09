@@ -7,9 +7,10 @@ angular.module("app").factory("userEntityService",function($http){
       console.log("hey");
       return $http.get("data/userEntityCustomJson.json");
     },
-    updateUserEntityData:function(id,userEntityObject){
-      console.log("update method called");
-      return $http.put("http://localhost:3040/api/userEntity/"+id,userEntityObject);
+    updateUserEntityData:function(id,entityData){
+      console.log("inside service.....");
+      console.log(entityData);
+      return $http.put("http://localhost:3040/api/userEntity/"+id,entityData);
     }
     // getStayCustomData: function(){
     //   return $http.get("http://172.23.238.178:8080/node/wipro/en/service/stay");
