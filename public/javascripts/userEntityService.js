@@ -10,21 +10,21 @@ angular.module("app").factory("userEntityService",function($http){
     updateUserEntityData:function(id,userEntityObject){
       console.log("update method called");
       return $http.put("http://localhost:3040/api/userEntity/"+id,userEntityObject);
-    },
-    getStayCustomData: function(){
-      
-    },
-    getFlightCustomData: function(){
-
-    },
-    getTrainCustomData: function(){
-
-    },
-    getBusCustomData:function(){
-
-    },
-    getLocalTravelCustomData:function(){
-
     }
+    // getStayCustomData: function(){
+    //   return $http.get("http://172.23.238.178:8080/node/wipro/en/service/stay");
+    // },
+    // getFlightCustomData: function(){
+    //   return $http.get("http://172.23.238.178:8080/edge/wipro/en/service/flight");
+    // },
+    // getTrainCustomData: function(){
+    //   return $http.get("http://172.23.238.178:8080/edge/wipro/en/service/train");
+    // },
+    // getBusCustomData:function(){
+    //  return $http.get("http://172.23.238.178:8080/edge/wipro/en/service/bus");
+    // },
+    // getLocalTravelCustomData:function(){
+    //  return $http.get("http://172.23.238.178:8080/node/wipro/en/service/localTravel");
+    // }
   }
 });

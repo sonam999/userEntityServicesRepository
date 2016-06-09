@@ -1,4 +1,4 @@
-{{entityData}}
+
 <div layout="row" flex="90" flex-offset="10">
 
   <div flex="30">
@@ -8,83 +8,86 @@
   <div layout="column">
 
     <div ng-repeat="(key,value) in userEntityCustomObject">
+
       <div ng-if="key=='personalInfo'">
       <md-card flex="80" layout-padding>
-          <md-card-header>
-              <span class="md-headline">{{key}}</span>
+        <div ng-repeat="(displayNameOrDisplayData,associatedValue) in value">
+          <md-card-header ng-if="displayNameOrDisplayData=='displayName'">
+              <span class="md-headline">{{associatedValue}}</span>
           </md-card-header>
-          <md-card-content layout="row" layout-wrap layout-padding>
-            <div flex="25" flex-offset="5" ng-repeat="(key,value) in value">
-               <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[key]" bind-data-key="entityData" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+          <md-card-content ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-wrap layout-padding>
+            <div flex="25" flex-offset="5" ng-repeat="(dataKey,dataValue) in associatedValue">
+               <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[dataKey]" bind-data-key="entityData" type="{{dataValue.type}}" label="{{dataValue.label}}" specific-attr="dataValue.specificAttr" required="true" id="{{dataKey}}"></custom-input-box>
             </div>
-         </md-card-content>
-         <md-card-actions layout="row" layout-align="end center">
-           <md-button>Modify</md-button>
-           <md-button ng-click="save()">Save</md-button>
-        </md-card-actions>
+          </md-card-content>
+          <md-card-actions ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-align="end center">
+            <md-button ng-click="save()" class="md-primary md-hue-1">Save</md-button>
+          </md-card-actions>
+       </div>
       </md-card>
     </div>
 
     <div ng-if="key=='passportDetails'">
       <md-card flex="80" layout-padding>
-          <md-card-header>
+        <div ng-repeat="(displayNameOrDisplayData,associatedValue) in value">
+          <md-card-header ng-if="displayNameOrDisplayData=='displayName'">
             <md-card-header-text>
-              <span class="md-headline">{{key}}</span>
+              <span class="md-headline">{{associatedValue}}</span>
             </md-card-header-text>
           </md-card-header>
-          <md-card-content layout="row" layout-wrap layout-padding>
-            <div flex="25" flex-offset="5" ng-repeat="(key,value) in value">
-                 <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[key]" bind-data-key="entityData.passport_details" type="{{value.type}}" label="{{value.label}}" specific-attr="value.specificAttr" required="true" id="{{key}}"></custom-input-box>
+          <md-card-content ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-wrap layout-padding>
+            <div flex="25" flex-offset="5" ng-repeat="(dataKey,dataValue) in associatedValue">
+                <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[dataKey]" bind-data-key="entityData.passport_details" type="{{dataValue.type}}" label="{{dataValue.label}}" specific-attr="dataValue.specificAttr" required="true" id="{{dataKey}}"></custom-input-box>
             </div>
          </md-card-content>
-         <md-card-actions layout="row" layout-align="end center">
-           <md-button>Modify</md-button>
-           <md-button ng-click="save()">Save</md-button>
-        </md-card-actions>
+         <md-card-actions ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-align="end center">
+           <md-button ng-click="save()" class="md-primary md-hue-1">Save</md-button>
+         </md-card-actions>
+       </div>
       </md-card>
     </div>
   </div><!--profileCustom json finished-->
 
   <div ng-repeat="preferencesObject in preferencesArray">
-    <div ng-repeat="(key,value) in preferencesObject">
-      <md-card flex="80" layout-padding ng-if="key=='serviceObject'">
-          <md-card-header>
-            <md-card-header-text>
-              <span class="md-headline">{{key}}</span>
-            </md-card-header-text>
-          </md-card-header>
-          <md-card-content layout="row" layout-wrap layout-padding>
-            <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in value">
-                <custom-input-box reflect-custom-input="reflectValue(keyString,associatedValue,id)" bind-data="entityData.preferences[key][associatedKey]" bind-data-key="entityData.preferences[key]" type="{{associatedValue.inputType}}" label="{{associatedValue.displayName}}" specific-attr="associatedValue.specificAttr" required="true" id="{{associatedKey}}"></custom-input-box>
-            </div>
-         </md-card-content>
-         <md-card-actions layout="row" layout-align="end center">
-           <md-button>Modify</md-button>
-           <md-button ng-click="save()">Save</md-button>
-        </md-card-actions>
-      </md-card>
+    <md-card flex="80" layout-padding>
+     <div ng-repeat="(key,value) in preferencesObject">
+      <md-card-header ng-if="key=='serviceDisplayName'">
+        <md-card-header-text>
+          <span class="md-headline">{{value}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content layout="row" ng-if="key=='serviceObject'" layout-wrap layout-padding>
+        <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in value">
+            <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.preferences[key][associatedKey]" bind-data-key="entityData.preferences[key]" type="{{associatedValue.inputType}}" label="{{associatedValue.displayName}}" specific-attr="associatedValue.specificAttr" required="true" id="{{associatedKey}}"></custom-input-box>
+        </div>
+      </md-card-content>
+       <md-card-actions ng-if="key=='serviceObject'" layout="row" layout-align="end center">
+         <md-button ng-click="save()" class="md-primary md-hue-1">Save</md-button>
+       </md-card-actions>
+      </div>
+     </md-card>
     </div>
-  </div>
+  <!--preferences  end-->
 
-
-    <!-- <div ng-if="key=='stay'||key=='flight'||key=='train'||key=='bus'||key=='localTravel'">
+   <div>
       <md-card flex="80" layout-padding>
           <md-card-header>
             <md-card-header-text>
-              <span class="md-headline">{{key}}</span>
+              <span class="md-headline">{{userEntityCustomObject.visa_availability.displayName}}</span>
             </md-card-header-text>
           </md-card-header>
-          <md-card-content layout="row" layout-wrap layout-padding>
-            <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in value">
-                <custom-input-box reflect-custom-input="reflectValue(keyString,associatedValue,id)" bind-data="entityData.preferences[key][associatedKey]" bind-data-key="entityData.preferences[key]" type="{{associatedValue.type}}" label="{{associatedValue.label}}" specific-attr="associatedValue.specificAttr" required="true" id="{{associatedKey}}"></custom-input-box>
+          <md-card-content layout-wrap layout-padding>
+          <div layout="row" ng-repeat="data in entityData.visa_availability">
+            <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in data">
+                <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.visa_availability[associatedKey]" bind-data-key="entityData.visa_availability[associatedKey]" type="{{userEntityCustomObject.visa_availability.displayData[associatedKey].type}}" label="{{userEntityCustomObject.visa_availability.displayData[associatedKey].label}}" specific-attr="userEntityCustomObject.visa_availability.displayData[associatedKey].specificAttr" id="{{associatedKey}}" required="true"></custom-input-box>
             </div>
-          </md-card-content>
+          </div>
+         </md-card-content>
          <md-card-actions layout="row" layout-align="end center">
-           <md-button>Modify</md-button>
-           <md-button ng-click="save()">Save</md-button>
-        </md-card-actions>
+           <md-button ng-click="save()" class="md-primary md-hue-1">Save</md-button>
+         </md-card-actions>
       </md-card>
-    </div> -->
+    </div>
 
    </div>
   </div>

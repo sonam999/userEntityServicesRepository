@@ -1,24 +1,40 @@
 angular.module("app",['ngMaterial','ngRoute','mdPickers'])
+  .factory('_',function() {
+    return window._;
+  })
   .config(function($routeProvider){
      $routeProvider.when('/userProfile',{
        templateUrl:"userProfile.html",
        controller:"userEntityServiceController",
        resolve:{
             userEntityData: function(userEntityService){
-              return userEntityService.getUserEntityData('tydalogger');
+               return userEntityService.getUserEntityData('tydalogger');
             },
             userEntityCustomData: function(userEntityService){
-              return userEntityService.getUserEntityCustomData();
-            }
-            // updateUserEntityData: function(userEntityService){
-            //   return userEntityService.updateUserEntityData('b4bc5412e7640090f4946b1417b3fc8792b4ec5d31e0810b9a8cab751e542975',entityData);
+               return userEntityService.getUserEntityCustomData();
+             }
+            // stayCustomData: function(userEntityService){
+            //     return userEntityService.getStayCustomData();
+            // },
+            // flightCustomData: function(userEntityService){
+            //     return userEntityService.getFlightCustomData();
+            // },
+            // trainCustomData: function(userEntityService){
+            //     return userEntityService.getTrainCustomData();
+            // },
+            // busCustomData:function(userEntityService){
+            //     return userEntityService.getBusCustomData();
+            // },
+            // localTravelCustomData:function(userEntityService){
+            //     return userEntityService.getLocalTravelCustomData();
             // }
          }
      });
   })
 
-  .controller("userEntityServiceController",function($scope,userEntityService,userEntityData,userEntityCustomData){
-
+  .controller("userEntityServiceController",function($scope,userEntityService,userEntityData,userEntityCustomData,_){
+    var obj = {name:'sonam',age:'23'};
+    console.log(_.pick(obj,'name'));
     console.log(userEntityCustomData);
     userEntityCustomObject=userEntityCustomData.data;
     console.log(userEntityCustomObject);
@@ -54,11 +70,36 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
 
    $scope.save=function(){
       console.log("inside save function");
-      userEntityService.updateUserEntityData('tydalogger',entityData).then(function(err,data){
-        if(err) console.log(err);
-        console.log(data);
+      userEntityService.updateUserEntityData('tydalogger',entityData).then(function(response){
+        console.log(response.data);
       });
    };
+
+      var pickDeep=function(collection, identity, thisArg) {
+      var picked = _.pick(collection, identity, thisArg);
+      var collections = _.pick(collection, _.isObject, thisArg);
+
+      _.each(collections, function(item, key, collection) {
+          var object;
+          if (_.isArray(item)) {
+              object = _.reduce(item, function(result, value) {
+                  var picked = pickDeep(value, identity, thisArg);
+                  if (!_.isEmpty(picked)) {
+                      result.push(picked);
+                  }
+                  return result;
+              }, []);
+          } else {
+              object = pickDeep(item, identity, thisArg);
+          }
+
+          if (!_.isEmpty(object)) {
+              picked[key] = object;
+          }
+
+      });
+    return picked;
+  };
 
    var stayCustomData={
         "serviceDisplayName": "Stay",
@@ -201,7 +242,9 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
           }
         }
 };
-
+var stayData=pickDeep(stayCustomData,['serviceDisplayName','preferences','rating','typeOfProperty','stars','amenities','proximity']);
+console.log("pickDeep method result");
+console.log(stayData);
 var flightCustomData={
         "serviceDisplayName": "Flight",
         "serviceObject": {
@@ -264,6 +307,9 @@ var flightCustomData={
           }
         }
    };
+
+   var flightData=pickDeep(flightCustomData,['serviceDisplayName','airlines','class']);
+   console.log(flightData);
    var trainCustomData={
         "serviceDisplayName": "Train",
         "serviceObject": {
@@ -294,6 +340,8 @@ var flightCustomData={
           }
         }
       };
+    var trainData=pickDeep(trainCustomData,['serviceDisplayName','class']);
+    console.log(trainData);
       var busCustomData={
         "serviceDisplayName": "Bus",
         "serviceObject": {
@@ -324,7 +372,8 @@ var flightCustomData={
           }
         }
       };
-
+  var busData=pickDeep(busCustomData,['serviceDisplayName','class']);
+  console.log(busData);
   var localTravelCustomData={
           "serviceDisplayName": "Local Travel",
           "serviceObject": {
@@ -372,12 +421,13 @@ var flightCustomData={
             }
           }
         };
-
+    var localTravelData=pickDeep(localTravelCustomData,['serviceDisplayName','typeOfLocalTransport']);
+    console.log(localTravelData);
     var preferencesArray=[];
-    preferencesArray.push(stayCustomData);
-    preferencesArray.push(flightCustomData);
-    preferencesArray.push(trainCustomData);
-    preferencesArray.push(busCustomData);
-    preferencesArray.push(localTravelCustomData);
+    preferencesArray.push(stayData);
+    preferencesArray.push(flightData);
+    preferencesArray.push(trainData);
+    preferencesArray.push(busData);
+    preferencesArray.push(localTravelData);
     $scope.preferencesArray=preferencesArray;
  });

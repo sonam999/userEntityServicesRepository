@@ -1,160 +1,161 @@
 {
   "personalInfo":{
-        "first_name":{
-            "id":"first_name",
-            "type":"text",
-            "label":"First name",
-            "specificAttr":{
-                "domainList":[]
-            }
-       },
-       "last_name":{
-            "id":"last_name",
-            "type":"text",
-            "label":"Last name",
-            "specificAttr":{
-                "domainList":[]
-            }
-       },
-        "role":{
-             "id":"role",
-             "type":"text",
-             "label":"Role",
-             "specificAttr":{
-                 "domainList":["project engineer","manager"]
-             }
-        },
-        "band":{
-            "id":"band",
-            "type":"text",
-            "label":"Band",
-            "specificAttr":{
-                "domainList":["A","B","C"]
-            }
-        },
-        "date_of_birth":{
-            "id":"date_of_birth",
-            "type":"date",
-            "label":"Date of birth",
-            "specificAttr":{
-                "domainList":[]
-            }
-        },
-        "residential_address":{
-          "id":"residential_address",
-          "type":"text",
-          "label":"Residential address",
-          "specificAttr":{
-              "domainList":[]
+       "displayName": "Personal Information",
+       "displayData":{
+              "first_name":{
+                  "id":"first_name",
+                  "type":"text",
+                  "label":"First name",
+                  "specificAttr":{
+                      "domainList":[]
+                  }
+             },
+             "last_name":{
+                  "id":"last_name",
+                  "type":"text",
+                  "label":"Last name",
+                  "specificAttr":{
+                      "domainList":[]
+                  }
+             },
+              "role":{
+                   "id":"role",
+                   "type":"text",
+                   "label":"Role",
+                   "specificAttr":{
+                       "domainList":["project engineer","manager"]
+                   }
+              },
+              "band":{
+                  "id":"band",
+                  "type":"text",
+                  "label":"Band",
+                  "specificAttr":{
+                      "domainList":["A","B","C"]
+                  }
+              },
+              "date_of_birth":{
+                  "id":"date_of_birth",
+                  "type":"date",
+                  "label":"Date of birth",
+                  "specificAttr":{
+                      "domainList":[]
+                  }
+              },
+              "residential_address":{
+                "id":"residential_address",
+                "type":"text",
+                "label":"Residential address",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "mobile":{
+                "id":"mobile",
+                "type":"text",
+                "label":"Mobile",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "date_of_joining":{
+                "id":"date_of_joining",
+                "type":"date",
+                "label":"Date of joining",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "language":{
+                "id":"language",
+                "type":"multiSelect",
+                "label":"Language",
+                "specificAttr":{
+                    "domainList":["English","Khmer", "Persian", "Kannada", "Arabic", "Khmer", "Aymara", "Indonesian", "Icelandic", "Icelandic", "Tetum"]
+                }
+              },
+              "work_location":{
+                "id":"work_location",
+                "type":"text",
+                "label":"Work location",
+                "specificAttr":{
+                    "domainList":["electronic city","koramangala","sarjapura"]
+                }
+              },
+              "country":{
+                "id":"country",
+                "type":"autoComplete",
+                "label":"Country",
+                "specificAttr":{
+                    "domainList":["India","USA"]
+                }
+              }
           }
-        },
-        "mobile":{
-          "id":"mobile",
-          "type":"text",
-          "label":"Mobile",
-          "specificAttr":{
-              "domainList":[]
-          }
-        },
-        "date_of_joining":{
-          "id":"date_of_joining",
-          "type":"date",
-          "label":"Date of joining",
-          "specificAttr":{
-              "domainList":[]
-          }
-        },
-        "language":{
-          "id":"language",
-          "type":"multiSelect",
-          "label":"Language",
-          "specificAttr":{
-              "domainList":["English","Khmer", "Persian", "Kannada", "Arabic", "Khmer", "Aymara", "Indonesian", "Icelandic", "Icelandic", "Tetum"]
-          }
-        },
-        "work_location":{
-          "id":"work_location",
-          "type":"text",
-          "label":"Work location",
-          "specificAttr":{
-              "domainList":["electronic city","koramangala","sarjapura"]
-          }
-        },
-        "country":{
-          "id":"country",
-          "type":"autoComplete",
-          "label":"Country",
-          "specificAttr":{
-              "domainList":["India","USA"]
-          }
-        }
 },
 "passportDetails":{
-        "passport_number":{
-          "id":"passport_number",
-          "type":"text",
-          "label":"Passport number",
-          "specificAttr":{
-              "domainList":[]
+        "displayName":"Passport Details",
+        "displayData":{
+              "passport_number":{
+                "id":"passport_number",
+                "type":"text",
+                "label":"Passport number",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "date_of_expiry":{
+                "id":"date_of_expiry",
+                "type":"date",
+                "label":"Date of expiry",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "date_of_issue":{
+                "id":"date_of_issue",
+                "type":"date",
+                "label":"Date of issue",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "issuing_authority":{
+                "id":"issuing_authority",
+                "type":"autoComplete",
+                "label":"Issuing Authority",
+                "specificAttr":{
+                    "domainList":["india","USA","china","nepal"]
+                }
+              }
           }
-        },
-        "date_of_expiry":{
-          "id":"date_of_expiry",
-          "type":"date",
-          "label":"Date of expiry",
-          "specificAttr":{
-              "domainList":[]
-          }
-        },
-        "date_of_issue":{
-          "id":"date_of_issue",
-          "type":"date",
-          "label":"Date of issue",
-          "specificAttr":{
-              "domainList":[]
-          }
-        },
-        "issuing_authority":{
-          "id":"issuing_authority",
-          "type":"autoComplete",
-          "label":"Issuing Authority",
-          "specificAttr":{
-              "domainList":["india","USA","china","nepal"]
-          }
-        }
 },
 "visa_availability":{
-        "from":{
-          "id":"from",
-          "type":"autoComplete",
-          "label":"From",
-          "specificAttr":{
-              "domainList":[]
+       "displayName":"Visa Availability",
+       "displayData":{
+              "from":{
+                "id":"from",
+                "type":"autoComplete",
+                "label":"From",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "to":{
+                "id":"to",
+                "type":"autoComplete",
+                "label":"To",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              },
+              "visa_category":{
+                "id":"visa_category",
+                "type":"text",
+                "label":"Visa category",
+                "specificAttr":{
+                    "domainList":[]
+                }
+              }
           }
-        },
-        "to":{
-          "id":"to",
-          "type":"autoComplete",
-          "label":"To",
-          "specificAttr":{
-              "domainList":[]
-          }
-        },
-        "visa_category":{
-          "id":"visa_category",
-          "type":"text",
-          "label":"Visa category",
-          "specificAttr":{
-              "domainList":[]
-          }
-        }
-},
-  "country":{
-      "id":"country",
-      "type":"autoComplete",
-      "label":"country",
-      "specificAttr":{
-          "domainList":[]
-      }
-  }
+    }
 }
