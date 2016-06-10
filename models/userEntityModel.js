@@ -77,62 +77,23 @@ userEntityService.getAll=function(callback){
   return userEntityModel.find({},callback);
 };
 
-userEntityService.postUserEntity=function(newUserEntityObject){
+userEntityService.postUserEntity=function(newUserEntityObject,callback){
    var newModel=new userEntityModel(newUserEntityObject);
-   return newModel.save();
+   return newModel.save(callback);
 };
 
-userEntityService.getUserEntity=function(userId){
-   var deferred=Q.defer();
+userEntityService.getUserEntity=function(userId,callback){
    console.log('inside get model');
    console.log(userId);
-   userEntityModel.findOne({id:userId})
-                  .exec(function(err,data){
-                      if(err){
-                        console.log(err);
-                        deferred.reject();
-                      }
-                      else{
-                          userEntityObject=data;
-                          if(userEntityObject==null){
-                            deferred.reject();
-                          }
-                          else{
-                            console.log(userEntityObject);
-                            deferred.resolve(userEntityObject);
-                          }
-                     }
-                  });
-          return deferred.promise;
+   userEntityModel.findOne({id:userId},callback);
 };
 
-userEntityService.putUserEntity=function(userId,newUserEntityObject){
-   var deferred=Q.defer();
-   userEntityModel.findOneAndUpdate({id:userId},newUserEntityObject,{new:true},function(err,data){
-     if(err){
-        deferred.reject(err);
-     }
-     else{
-         if(data==null){deferred.reject();}
-         else{
-           console.log("inside model..............");
-           console.log(newUserEntityObject);
-           deferred.resolve(data);
-         }
-      }
-    });
-   return deferred.promise;
+userEntityService.putUserEntity=function(userId,newUserEntityObject,callback){
+    userEntityModel.findOneAndUpdate({id:userId},newUserEntityObject,{new:true},callback);
 };
 
-userEntityService.deleteUserEntity=function(userId){
-   var deferred=Q.defer();
-   userEntityModel.remove({id:userId})
-                  .exec(function(err){
-                    console.log(err);
-                    message="deleted successfully";
-                    deferred.resolve(message);
-   })
-   return deferred.promise;
+userEntityService.deleteUserEntity=function(userId,callback){
+   userEntityModel.remove({id:userId},callback);
 };
 
 module.exports=userEntityService;

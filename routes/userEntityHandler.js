@@ -15,14 +15,16 @@ router.route('/userEntity')
 
   .post(function(req,res,next){
       console.log(req);
-      var userEntityObject=req.body.userEntityObject;
+      var userEntityObject=req.body;
       console.log(userEntityObject);
-      userEntityService.postUserEntity(userEntityObject)
-                        .then(function(err,result){
-                          if(err) res.send(err);
-                          console.log('data stored');
-                          res.json({message:result});
-     });
+      userEntityService.postUserEntity(userEntityObject,function(err,data){
+        if(err){ console.log(err)}
+        else{
+          console.log(data);
+          message="add successfully";
+          res.json({result:message});
+        }
+      })
   });
 
 
@@ -31,15 +33,19 @@ router.route('/userEntity/:Id')
     .get(function(req,res,next){
        var userId=req.params.Id;
        console.log(userId);
-       userEntityService.getUserEntity(userId)
-                        .then(function(result){
-                            console.log('inside get by id');
-                            console.log(result);
-                            res.json(result);
-       }).catch(function(err){
-          console.log(err);
-          res.sendStatus(404);
-       });
+       userEntityService.getUserEntity(userId,function(err,data){
+         if(err) {
+           console.log(err);
+         }
+         else{
+           if(data==null){
+             res.sendStatus(404);
+           }
+           else{
+             res.json({result:data});
+           }
+         }
+        });
   })
 
   .put(function(req,res,next){
@@ -48,26 +54,40 @@ router.route('/userEntity/:Id')
       console.log(userId);
       console.log("inside handler........");
       console.log(userEntityObject);
-      userEntityService.putUserEntity(userId,userEntityObject)
-                       .then(function(result){
-                         console.log(result);
-                         console.log('inside put method');
-                         res.json({msg:result});
-     }).catch(function(err){
-       res.sendStatus(404);
-     });
-  })
+      userEntityService.putUserEntity(userId,userEntityObject,function(err,data){
+          if(err){
+            console.log(err);
+          }
+          else{
+            if(data==null){
+              res.sendStatus(404);
+            }else{
+               console.log(data);
+               var message="update successfully";
+               res.json({result:message});
+            }
+          }
+      });
+    })
 
   .delete(function(req,res,next){
      var userId=req.params.Id;
-     userEntityService.deleteUserEntity(userId)
-                      .then(function(result){
-                        console.log(result);
-                        console.log('inside delete method');
-                        res.json({msg:result});
-   }).catch(function(err){
-     res.send(err);
-   })
+     userEntityService.deleteUserEntity(userId,function(err,data){
+       if(err){
+         console.log(err);
+         res.send(err);
+       }
+       else{
+         console.log(data);
+         if(data==null){
+           res.sendStatus(404);
+         }
+         else{
+           message="delete successfully";
+           res.json({result:message});
+         }
+       }
+     })
 });
 
 module.exports=router;

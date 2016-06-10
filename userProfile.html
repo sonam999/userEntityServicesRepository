@@ -12,9 +12,11 @@
       <div ng-if="key=='personalInfo'">
       <md-card flex="80" layout-padding>
         <div ng-repeat="(displayNameOrDisplayData,associatedValue) in value">
-          <md-card-header ng-if="displayNameOrDisplayData=='displayName'">
-              <span class="md-headline">{{associatedValue}}</span>
-          </md-card-header>
+          <md-toolbar ng-if="displayNameOrDisplayData=='displayName'">
+            <md-card-header>
+                <span class="md-headline">{{associatedValue}}</span>
+            </md-card-header>
+          </md-toolbar>
           <md-card-content ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-wrap layout-padding>
             <div flex="25" flex-offset="5" ng-repeat="(dataKey,dataValue) in associatedValue">
                <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData[dataKey]" bind-data-key="entityData" type="{{dataValue.type}}" label="{{dataValue.label}}" specific-attr="dataValue.specificAttr" required="true" id="{{dataKey}}"></custom-input-box>
@@ -30,11 +32,13 @@
     <div ng-if="key=='passportDetails'">
       <md-card flex="80" layout-padding>
         <div ng-repeat="(displayNameOrDisplayData,associatedValue) in value">
-          <md-card-header ng-if="displayNameOrDisplayData=='displayName'">
+          <md-toolbar ng-if="displayNameOrDisplayData=='displayName'">
+          <md-card-header>
             <md-card-header-text>
               <span class="md-headline">{{associatedValue}}</span>
             </md-card-header-text>
           </md-card-header>
+        </md-toolbar>
           <md-card-content ng-if="displayNameOrDisplayData=='displayData'" layout="row" layout-wrap layout-padding>
             <div flex="25" flex-offset="5" ng-repeat="(dataKey,dataValue) in associatedValue">
                 <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.passport_details[dataKey]" bind-data-key="entityData.passport_details" type="{{dataValue.type}}" label="{{dataValue.label}}" specific-attr="dataValue.specificAttr" required="true" id="{{dataKey}}"></custom-input-box>
@@ -51,11 +55,13 @@
   <div ng-repeat="preferencesObject in preferencesArray">
     <md-card flex="80" layout-padding>
      <div ng-repeat="(key,value) in preferencesObject">
-      <md-card-header ng-if="key=='serviceDisplayName'">
+      <md-toolbar ng-if="key=='serviceDisplayName'">
+      <md-card-header>
         <md-card-header-text>
           <span class="md-headline">{{value}}</span>
         </md-card-header-text>
       </md-card-header>
+    </md-toolbar>
       <md-card-content layout="row" ng-if="key=='serviceObject'" layout-wrap layout-padding>
         <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in value">
             <custom-input-box reflect-custom-input="reflectValue(keyString,value,id)" bind-data="entityData.preferences[key][associatedKey]" bind-data-key="entityData.preferences[key]" type="{{associatedValue.inputType}}" label="{{associatedValue.displayName}}" specific-attr="associatedValue.specificAttr" required="true" id="{{associatedKey}}"></custom-input-box>
@@ -71,11 +77,13 @@
 
    <div>
       <md-card flex="80" layout-padding>
+        <md-toolbar>
           <md-card-header>
             <md-card-header-text>
               <span class="md-headline">{{userEntityCustomObject.visa_availability.displayName}}</span>
             </md-card-header-text>
           </md-card-header>
+        </md-toolbar>
           <md-card-content layout-wrap layout-padding>
           <div layout="row" ng-repeat="data in entityData.visa_availability">
             <div flex="25" flex-offset="5" ng-repeat="(associatedKey,associatedValue) in data">

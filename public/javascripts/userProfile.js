@@ -35,6 +35,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
   .controller("userEntityServiceController",function($scope,userEntityService,userEntityData,userEntityCustomData,_){
     var obj = {name:'sonam',age:'23'};
     console.log(_.pick(obj,'name'));
+
     console.log(userEntityCustomData);
     userEntityCustomObject=userEntityCustomData.data;
     console.log(userEntityCustomObject);
@@ -63,7 +64,7 @@ angular.module("app",['ngMaterial','ngRoute','mdPickers'])
    };
 
    console.log(userEntityData);
-   var entityData=userEntityData.data;
+   var entityData=userEntityData.data.result;
    console.log(entityData);
    entityData.picture="public/images/avatar-female.png"
    $scope.entityData=entityData;
