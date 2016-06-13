@@ -11,5 +11,5 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/user-entity-microservice
 
-CMD [ "node", "app.js" ]
+CMD [ "npm", "start" ]
 		
