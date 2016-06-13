@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 
-mongoose.connect('mongodb://localhost/userEntityDatabase');
+mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 var userEntityDatabase=mongoose.connection;
 
 // view engine setup
@@ -65,10 +65,5 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-
-app.listen(3040, function () {
-    console.log('user entity server started!!');
-});
 
 module.exports = app;
